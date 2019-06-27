@@ -10,10 +10,11 @@ import UIKit
 
 class secondView : UIViewController{
    
+    @IBOutlet weak var joinEmailInput: UITextField!
+    @IBOutlet weak var joinNameInput: UILabel!
     @IBOutlet weak var joinIdInput: UITextField!
     @IBOutlet weak var joinPwdInput: UITextField!
-    //이메일버튼 생성
-    @IBOutlet weak var joinEmailInput: UITextField!
+
     
     
     var databasePath = String()
