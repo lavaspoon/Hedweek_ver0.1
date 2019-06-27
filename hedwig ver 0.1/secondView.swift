@@ -4,7 +4,6 @@
 //  Created by lavaspoon on 25/06/2019.
 //  Copyright © 2019 lavaspoon. All rights reserved.
 //
-// pull
 
 import UIKit
 
