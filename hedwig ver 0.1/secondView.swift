@@ -4,7 +4,6 @@
 //  Created by lavaspoon on 25/06/2019.
 //  Copyright © 2019 lavaspoon. All rights reserved.
 //
-// pull
 
 import UIKit
 
@@ -66,7 +65,7 @@ class secondView : UIViewController{
                 }
                 // 아이디가 중복이 아닐 때 가입하기
                 else {
-                    let sql1 = "INSERT INTO MEMBER VALUES ('\(joinIdInput.text!)', '\(joinPwdInput.text!)', '', '')"
+                    let sql1 = "INSERT INTO MEMBER VALUES ('\(joinEmailInput.text!)', '\(joinNameInput.text!)', '\(joinIdInput.text!)', '\(joinPwdInput.text!)')"
                     if !contactDB.executeStatements(sql1) {
                         NSLog("회원가입 sql 오류")
                     }
