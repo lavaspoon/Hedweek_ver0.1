@@ -74,7 +74,7 @@ class ViewController: UIViewController {
         // ID 조회 종료
         
         //메인메뉴로 가는 객체선언
-        let menuScreen = self.storyboard!.instantiateViewController(withIdentifier: "Menu")
+        let menuScreen = self.storyboard!.instantiateViewController(withIdentifier: "mainView")
         menuScreen.modalTransitionStyle = .coverVertical
         //
         
