@@ -9,10 +9,10 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet var uiIdInput: UITextField!
     @IBOutlet var uiPasswordInput: UITextField!
-        
+    
     var id = String()
     var password = String()
     
@@ -33,10 +33,10 @@ class ViewController: UIViewController {
             let contactDB = FMDatabase(path: databasePath) // FMDatabase 클래스의 인스턴스 생성
             
             if contactDB.open() {
-                let sql1 = "CREATE TABLE IF NOT EXISTS MEMBER (ID TEXT PRIMARY KEY, PASSWORD TEXT, NAME TEXT, AGE INTEGER)"
+                let sql1 = "CREATE TABLE IF NOT EXISTS MEMBER (EMAIL TEXT NOT NULL, NAME TEXT NOT NULL, ID TEXT NOT NULL PRIMARY KEY, PASSWORD TEXT NOT NULL)"
                 // if not exists test : 테이블이 존재하지 않으면
                 // 실행할 쿼리를 sql1 상수에 미리 저장하고 executeStatements로 구문을 실행해 실제 DB 테이블 생성
-                let sql2 = "INSERT INTO MEMBER VALUES ('root', '1234', '운영자', '26')"
+                let sql2 = "INSERT INTO MEMBER VALUES ('hedweek@hedweek.co.kr', '운영자', 'root', '1234')"
                 if !contactDB.executeStatements(sql1) {
                     NSLog("SQL 오류 1")
                 }
@@ -52,13 +52,13 @@ class ViewController: UIViewController {
         }
         // < DB 설정 종료 > //
     }
-
+    
     @IBAction func loginClicked(_ sender: Any) {
         
         let userId = uiIdInput.text
         let userPassword = uiPasswordInput.text
         
-        // ID 조회
+        // ID 조회 시작
         let contactDB = FMDatabase(path: databasePath)
         contactDB.open()
         let selectsql = "SELECT * FROM MEMBER WHERE ID = '\(userId!)'"
@@ -71,42 +71,36 @@ class ViewController: UIViewController {
         } catch {
             NSLog("ID 조회 DB 오류")
         }
-        // ID 조회
-        
-        
-        
-        
+        // ID 조회 종료
         
         //메인메뉴로 가는 객체선언
         let menuScreen = self.storyboard!.instantiateViewController(withIdentifier: "Menu")
         menuScreen.modalTransitionStyle = .coverVertical
         //
         
-        
-        
-        //alert 변수에 UIAlertController 객체가 할당됨
-        let alert = UIAlertController(
-            title: "알림창",
-            message: "아이디: \(userId!), 비밀번호: \(userPassword!)",
-            preferredStyle: .alert
-        )
-        //alert에서 확인버튼 클릭시
-        let okAction = UIAlertAction(title: "OK", style: .default){
-            (alert:UIAlertAction!) -> Void in
-            NSLog("알림 대화상자의 확인 버튼이 눌렸습니다.")
-            
-            if(userId == self.id) && (userPassword == self.password){
-                self.present(menuScreen, animated: true,    completion: nil)
-                NSLog("로그인 성공")
-            }else{
-                NSLog("로그인 실패")
+        if (userId != self.id) || (userPassword != self.password) || (userId != nil) || (userPassword != nil) {
+            //alert 변수에 UIAlertController 객체가 할당됨
+            let alert = UIAlertController(
+                title: "알림창",
+                message: "아이디나 비밀번호가 일치하지 않습니다.",
+                preferredStyle: .alert
+            )
+            //alert에서 확인버튼 클릭시
+            let okAction = UIAlertAction(title: "OK", style: .default){
+                (alert:UIAlertAction!) -> Void in
+                
             }
+            alert.addAction(okAction)
+            present(alert,animated: true, completion: nil)
+        } else {
+            self.present(menuScreen, animated: true, completion: nil)
         }
         
-        alert.addAction(okAction)
-        present(alert,animated: true, completion: nil)
+        
+        
+        
         
     }
-
+    
 }
 
