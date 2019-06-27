@@ -11,6 +11,9 @@ class secondView : UIViewController{
     @IBOutlet weak var joinIdInput: UITextField!
     @IBOutlet weak var joinPwdInput: UITextField!
     
+    @IBOutlet weak var joinEmailInput: UITextField!
+    
+    
     var databasePath = String()
     
     @IBAction func backBtn(_ sender: UIButton) {
