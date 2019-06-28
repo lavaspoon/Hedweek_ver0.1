@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import Firebase
+import GoogleSignIn
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, GIDSignInUIDelegate {
     
     @IBOutlet var uiIdInput: UITextField!
     @IBOutlet var uiPasswordInput: UITextField!
@@ -21,6 +23,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //구글로그인
+        GIDSignIn.sharedInstance().uiDelegate = self
+        
         
         // < DB 설정 : DB를 사용하기 위해 미리 파일을 구성하고 테입르을 삽입하는 과정 > //
         
@@ -51,6 +56,10 @@ class ViewController: UIViewController {
             NSLog("contactDB가 존재")
         }
         // < DB 설정 종료 > //
+    }
+    //구글로그인
+    @IBAction func googleSignIn(_ sender: Any) {
+        GIDSignIn.sharedInstance().signIn()
     }
     
     @IBAction func loginClicked(_ sender: Any) {

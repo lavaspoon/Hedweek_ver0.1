@@ -1,0 +1,6 @@
+framework module Pods_hedwig_ver_0_1UITests {
+  umbrella header "Pods-hedwig ver 0.1UITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
