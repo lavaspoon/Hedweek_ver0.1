@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 import GoogleSignIn
 
 class ViewController: UIViewController, GIDSignInUIDelegate {
@@ -23,10 +24,25 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //구글로그인
+        
+        
+        //  <firebase database 입력 테스트중 >    //
+        //let ref = Database.database().reference() //firebase database 경로 변수
+       //ref.child("user/name").setValue("Mike") -업뎃
+        //ref.childByAutoId().setValue(["email":"Mike","name":"Eunho","id":"lavaspoon","password":"1234"])
+       //ref.child("user").removeValue() -삭제
+        //  <firebase database 입력 테스트중 끝 >    //
+        
+        
+        
+        
+        //  구글로그인 시작 //
         GIDSignIn.sharedInstance().uiDelegate = self
+        //  구글로그인 끝//
+       
         
         
+        //< Local SQLite Database >
         // < DB 설정 : DB를 사용하기 위해 미리 파일을 구성하고 테입르을 삽입하는 과정 > //
         
         let fileMgr = FileManager.default // FileManager의 인스턴스 생성
@@ -55,17 +71,13 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
         } else {
             NSLog("contactDB가 존재")
         }
-        // < DB 설정 종료 > //
+        // < SQLite 설정 종료 > //
+        
     }
-    //구글로그인
-    @IBAction func googleSignIn(_ sender: Any) {
-        GIDSignIn.sharedInstance().signIn()
- 
-    }
-    @IBAction func googleLogout(_ sender: Any) {
-        GIDSignIn.sharedInstance().signOut()
-        NSLog("로그아웃")
-    }
+    
+    
+    
+    // <<로그인 버튼 눌렀을때 시작>> //
     
     @IBAction func loginClicked(_ sender: Any) {
         
@@ -109,12 +121,85 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
         } else {
             self.present(menuScreen, animated: true, completion: nil)
         }
-        
-        
-        
-        
-        
     }
+    
+       // <<로그인 버튼 눌렀을때 끝>> //
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //------------------lavaspoon 테스트-------------------//
+    
+    
+    //  <<이메일 로그인 테스트(가입버튼)>>   //
+    @IBAction func joinClicked(_ sender: Any) {
+        
+        let alert1 = UIAlertController(title: "회원가입", message: "이메일 회원가입 완료", preferredStyle: .alert)
+        let alert2 = UIAlertController(title: "이메일", message: "비번6자리 이상 입력하세요. 또는 중복입니다.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert1.addAction(okAction)
+        alert2.addAction(okAction)
+        
+        Auth.auth().createUser(withEmail: uiIdInput.text!, password: uiPasswordInput.text!
+        ) { (user, error) in
+            if user !=  nil{
+                print("register success")
+                self.present(alert1, animated: true, completion: nil)
+            }
+            else{
+                print("register failed")
+                self.present(alert2, animated: true, completion: nil)
+            }
+        }
+    }
+    //  <<이메일 로그인 테스트(로그인버튼)>>  //
+    @IBAction func loginClickedtest(_ sender: Any) {
+        //메인메뉴로 가는 객체선언
+        let menuScreen = self.storyboard!.instantiateViewController(withIdentifier: "mainView")
+        menuScreen.modalTransitionStyle = .coverVertical
+        //
+        let alert = UIAlertController(title: "로그인", message: "로그인실패", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(okAction)
+        
+        Auth.auth().signIn(withEmail: uiIdInput.text!, password: uiPasswordInput.text!) { (user, error) in
+            if user != nil{
+                self.present(menuScreen, animated: true, completion: nil)
+                print("login success")
+            }
+            else{
+                print("login fail")
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    //  <<이메일 로그인 테스트(로그인버튼) 끝>>    //
+    
+    //  <<구글로그인 시작>>    //
+    @IBAction func googleSignIn(_ sender: Any) {
+        GIDSignIn.sharedInstance().signIn()
+    }
+    @IBAction func googleLogout(_ sender: Any) {
+        GIDSignIn.sharedInstance().signOut()
+        NSLog("로그아웃")
+    }
+    //  <<구글 로그인 끝>>    //
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
 

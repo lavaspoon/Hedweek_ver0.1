@@ -58,7 +58,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRp-LP-EkA" customClass="GIDSignInButton">
-                                <rect key="frame" x="67" y="622" width="241" height="48"/>
+                                <rect key="frame" x="67" y="622" width="240" height="48"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="SnE-Ae-SHz"/>
@@ -77,6 +77,22 @@
                                 <state key="normal" title="logout"/>
                                 <connections>
                                     <action selector="googleLogout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hr8-GL-wwB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wcd-CU-LvH">
+                                <rect key="frame" x="6" y="116" width="164" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="email가입"/>
+                                <connections>
+                                    <action selector="joinClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zoz-xd-iAy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMV-0g-jMf">
+                                <rect key="frame" x="222" y="116" width="137" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="이메일 로그인"/>
+                                <connections>
+                                    <action selector="loginClickedtest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ht6-xm-Yes"/>
                                 </connections>
                             </button>
                         </subviews>
