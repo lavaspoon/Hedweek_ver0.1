@@ -60,6 +60,11 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
     //구글로그인
     @IBAction func googleSignIn(_ sender: Any) {
         GIDSignIn.sharedInstance().signIn()
+ 
+    }
+    @IBAction func googleLogout(_ sender: Any) {
+        GIDSignIn.sharedInstance().signOut()
+        NSLog("로그아웃")
     }
     
     @IBAction func loginClicked(_ sender: Any) {

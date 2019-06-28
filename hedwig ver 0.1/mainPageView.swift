@@ -10,7 +10,10 @@ import UIKit
 
 class mainPageView : UIViewController{
     
-
+    @IBAction func logoutClicked(_ sender: Any) {
+        
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
